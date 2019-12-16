@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Concert Manager"
+        android:textSize="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+
+        <TextView
+            android:id="@+id/beschrijving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Met onze app kan je de komende concerten in de buurt bekijken. Je kan ook detailinformatie van een concert zien door er eentje te selecteren. Je kan een review schrijven van een concert dat je bezocht hebt, en je gemaakte reviews bekijken zodat je kan zien naar welke concerten je allemaal geweest bent. Je kan ook de concertzalen in de buurt tonen op een kaart."
+
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+
+        <TextView
+            android:id="@+id/gemaakt_door"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gemaakt door"
+            android:textSize="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:id="@+id/makers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Midas Van Herck en Stef Mariën"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wij zijn 2 studenten Toegepaste Informatica aan Thomas More Kempen. Wij zijn gepassioneerd voor IT en muziek, en maken deze app in opdracht van Mobile Development"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
