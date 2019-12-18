@@ -23,7 +23,7 @@ public class Agenda extends AppCompatActivity {
     }
 
     private void toonConcerten(){
-        List<Concert> concerten = new ArrayList<Concert>();
+       /* List<Concert> concerten = new ArrayList<Concert>();
         concerten.add(new Concert(1, "Elton John - Platinum Tickets"));
         concerten.add(new Concert(2, "Werchter Boutique pop-up"));
         concerten.add(new Concert(3, "Werchter Boutique 2020"));
@@ -37,7 +37,37 @@ public class Agenda extends AppCompatActivity {
 
         final ListView listConcerten = (ListView) findViewById(R.id.listViewItems);
         listConcerten.setAdapter(adapter);
+
+        */
+
+
+            HttpReader httpReader = new HttpReader();
+            httpReader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
+                @Override
+                public void resultReady(String result) {
+                    JsonHelper jsonHelper = new JsonHelper();
+                    final List<Concert> concerten = jsonHelper.getConcerten(result);
+
+                    ArrayAdapter<Concert> adapter =
+                            new ArrayAdapter<Concert>(getApplicationContext(),
+                                    android.R.layout.simple_list_item_1, concerten);
+
+                    final ListView listConcerten = (ListView) findViewById(R.id.listViewItems);
+                    listConcerten.setAdapter(adapter);
+                }
+            });
+            httpReader.execute("https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&countryCode=BE&apikey=ULfwtsW3mXLAZ9euNL3aEFVoIbtGpAeE&size=20");
+        }
+
+    public void details_onClick(View v)
+    {
+        String Name=
+
+        Intent intent = new Intent(this, ConcertDetail.class);
+        startActivity(intent);
     }
+
+
 
 
 }
