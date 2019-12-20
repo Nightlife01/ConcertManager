@@ -71,7 +71,6 @@ public class Agenda extends AppCompatActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> parentView,
                                                         View childView, int position, long id) {
-                                    //toon(competities.get(position).getNaam());
 
                                     Bundle bundle = new Bundle();
                                     bundle.putString("naam", concerten.get(position).getNaam());

@@ -14,7 +14,7 @@
             <item android:id="@+id/menu_kaart"
                 android:title="Kaart" />
             <item android:id="@+id/menu_toevoegen"
-                android:title="Review schrijven" />
+                android:title="Review toevoegen" />
             <item android:id="@+id/menu_login"
                 android:title="Login"/>
 </menu>

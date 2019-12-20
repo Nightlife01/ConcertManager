@@ -2,6 +2,7 @@ package be.thomasmore.concertmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,14 +14,13 @@ import java.util.List;
 
 public class Favorieten extends AppCompatActivity {
 
-    private DatabaseHelper db;
+    private DatabaseHelper db = new DatabaseHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorieten);
 
-        db = new DatabaseHelper(this);
         toonFavorieten();
     }
 
@@ -34,6 +34,23 @@ public class Favorieten extends AppCompatActivity {
 
         final ListView listFavorieten = (ListView) findViewById(R.id.listViewItems);
         listFavorieten.setAdapter(adapter);
+
+        listFavorieten.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parentView,
+                                            View childView, int position, long id) {
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("naam", favorieten.get(position).getNaam());
+                        bundle.putString("id", favorieten.get(position).getId());
+
+                        Intent intent = new Intent(getApplicationContext(), ConcertDetailUitDb.class);
+                        intent.putExtras(bundle);
+
+                        startActivity(intent);
+                    }
+                });
     }
 
 

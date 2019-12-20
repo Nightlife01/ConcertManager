@@ -16,7 +16,7 @@ import android.widget.TextView;
 import java.net.URL;
 import java.util.List;
 
-public class ConcertDetail extends AppCompatActivity {
+public class ConcertDetailUitDb extends AppCompatActivity {
     private Concert concert;
     private DatabaseHelper db = new DatabaseHelper(this);
     boolean favorite = false;
@@ -34,23 +34,14 @@ public class ConcertDetail extends AppCompatActivity {
         getConcert(id);
     }
 
-    private void getConcert(String id){
-        HttpReader httpReader = new HttpReader();
-        httpReader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
-            @Override
-            public void resultReady(String result) {
-                JsonHelper jsonHelper = new JsonHelper();
-                concert = jsonHelper.getConcert(result);
-                Log.d("concert", ""+concert);
-
-                showConcert(concert);
-
-            }
-        });
-        httpReader.execute("https://app.ticketmaster.com/discovery/v2/events/"+id+".json?classificationName=music&countryCode=BE&apikey=ULfwtsW3mXLAZ9euNL3aEFVoIbtGpAeE&size=20");
+    private void getConcert(String id)
+    {
+        concert = db.getConcert(id);
+        showConcert(concert);
     }
 
-    private void showConcert(Concert concert){
+    private void showConcert(Concert concert)
+    {
         TextView name = (TextView) findViewById(R.id.name);
         name.setText(concert.getNaam());
 
@@ -71,17 +62,19 @@ public class ConcertDetail extends AppCompatActivity {
 
     }
 
-    public void onClick(View v){
+    public void onClick(View v)
+    {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(concert.getUrl()));
         startActivity(browserIntent);
     }
 
-    public void favorite(View v){
-        Log.e("Favorite", ""+concert);
+    public void favorite(View v)
+    {
         db.insertFavorite(concert);
     }
 
-    public void checkFavorite(String id){
+    public void checkFavorite(String id)
+    {
         favorite = db.checkConcert(id);
     }
 }

@@ -14,11 +14,15 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    // Database Version
+    private static final int DATABASE_VERSION = 3;
+    // Database Name
+    private static final String DATABASE_NAME = "concert.db";
 
 
     public DatabaseHelper(Context context)
     {
-        super(context,"concert.db" ,null,3);
+        super(context,DATABASE_NAME ,null,DATABASE_VERSION);
     }
 
     @Override
@@ -42,7 +46,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private void insertConcerten(SQLiteDatabase db)
     {
-
         db.execSQL("INSERT INTO concert (id, naam,url,image,datum,genres) VALUES ('1', 'Rock werchter 2019','https://www.rockwerchter.be/nl/','https://assets.rockwerchter.be/files/cache/history_detail/files/rw19-v2-5d306b4f52a6a.jpg','2019-06-27','ROCK, POP');");
 
     }
@@ -75,7 +78,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion,int newVersion)
     {
-        db.execSQL("drop table if exists user");
+        db.execSQL("DROP TABLE IF EXISTS user");
+        db.execSQL("DROP TABLE IF EXISTS concert");
+
+        // Create tables again
+        onCreate(db);
     }
 
     public boolean insert(String email,String password)
@@ -103,7 +110,89 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor=db.rawQuery("select * from user where email=? and password=?", new String[]{email,password});
         if (cursor.getCount()>0) return true;
         else return false;
+    }
 
+    public void insertFavorite(Concert concert){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id",concert.getId());
+        contentValues.put("naam",concert.getNaam());
+        contentValues.put("url",concert.getUrl());
+        contentValues.put("image",concert.getImage());
+        contentValues.put("datum",concert.getDate());
+        contentValues.put("genres",concert.getGenres());
+        db.insert("concert",null,contentValues);
+    }
+
+    public boolean checkConcert(String id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        boolean output = false;
+
+        Cursor cursor = db.query(
+                "concert",      // tabelnaam
+                new String[] { "id", "naam", "url", "image", "datum", "genres" }, // kolommen
+                "id = ?",  // selectie
+                new String[] { String.valueOf(id) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+
+        Concert concert = new Concert();
+
+        if (cursor.moveToFirst()) {
+            output = true;
+        }
+        cursor.close();
+        db.close();
+
+        return output;
+    }
+
+    public Concert getConcert(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                "concert",      // tabelnaam
+                new String[] { "id", "naam", "url", "image", "datum", "genres" }, // kolommen
+                "id = ?",  // selectie
+                new String[] { String.valueOf(id) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+
+        Concert concert = new Concert();
+
+        if (cursor.moveToFirst()) {
+            concert = new Concert(cursor.getString(0),
+                    cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+        }
+        cursor.close();
+        db.close();
+        return concert;
+    }
+
+    public List<Concert> getReviewableConcerts(String nu) {
+        List<Concert> lijst = new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM concert WHERE datum < '"+nu+"'";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        Concert concert = new Concert();
+
+        if (cursor.moveToFirst()) {
+            do {
+                concert = new Concert(cursor.getString(0),
+                        cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+                lijst.add(concert);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return lijst;
     }
 
 }

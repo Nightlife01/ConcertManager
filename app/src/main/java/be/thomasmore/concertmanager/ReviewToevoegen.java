@@ -1,70 +1,62 @@
 package be.thomasmore.concertmanager;
 
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.RatingBar;
-import android.widget.RatingBar.OnRatingBarChangeListener;
-import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class ReviewToevoegen extends AppCompatActivity {
 
-    private RatingBar ratingBar;
-    private TextView txtRatingValue;
-    private Button btnSubmit;
+    private DatabaseHelper db = new DatabaseHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_toevoegen);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        addListenerOnRatingBar();
-        addListenerOnButton();
-
-
+        toonReviewableConcert();
     }
 
-    public void addListenerOnRatingBar() {
 
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        txtRatingValue = (TextView) findViewById(R.id.txtRatingValue);
+    private void toonReviewableConcert(){
+        String currentDate = new SimpleDateFormat("yyyy-mm-dd", Locale.getDefault()).format(new Date());
+        Log.e("Datum",""+currentDate);
+        final List<Concert> reviewables = db.getReviewableConcerts(currentDate);
 
+        ArrayAdapter<Concert> adapter =
+                new ArrayAdapter<Concert>(this,
+                        android.R.layout.simple_list_item_1, reviewables);
 
-        ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
-            public void onRatingChanged(RatingBar ratingBar, float rating,
-                                        boolean fromUser) {
+        final ListView listReviewables = (ListView) findViewById(R.id.listViewItems);
+        listReviewables.setAdapter(adapter);
 
-                txtRatingValue.setText(String.valueOf(rating));
+        listReviewables.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parentView,
+                                            View childView, int position, long id) {
 
-            }
-        });
-    }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("naam", reviewables.get(position).getNaam());
+                        bundle.putString("id", reviewables.get(position).getId());
 
-    public void addListenerOnButton() {
+                        Intent intent = new Intent(getApplicationContext(), ReviewSchrijven.class);
+                        intent.putExtras(bundle);
 
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        btnSubmit = (Button) findViewById(R.id.btnSubmit);
-
-
-        btnSubmit.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(ReviewToevoegen.this,
-                        String.valueOf(ratingBar.getRating()),
-                        Toast.LENGTH_SHORT).show();
-
-            }
-
-        });
-
+                        startActivity(intent);
+                    }
+                });
     }
 
 }
