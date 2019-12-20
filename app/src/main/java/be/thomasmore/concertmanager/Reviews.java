@@ -21,8 +21,8 @@ public class Reviews extends AppCompatActivity {
 
     private void toonReviews(){
         List<Concert> concerten = new ArrayList<Concert>();
-        concerten.add(new Concert(8, "Werchter Boutique 2019"));
-        concerten.add(new Concert(19, "Rock Werchter 2019"));
+        //concerten.add(new Concert(8, "Werchter Boutique 2019"));
+        //concerten.add(new Concert(19, "Rock Werchter 2019"));
 
         ArrayAdapter<Concert> adapter =
                 new ArrayAdapter<Concert>(getApplicationContext(),

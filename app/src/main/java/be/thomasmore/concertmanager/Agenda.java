@@ -54,20 +54,28 @@ public class Agenda extends AppCompatActivity {
 
                     final ListView listConcerten = (ListView) findViewById(R.id.listViewItems);
                     listConcerten.setAdapter(adapter);
+
+                    listConcerten.setOnItemClickListener(
+                            new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parentView,
+                                                        View childView, int position, long id) {
+                                    //toon(competities.get(position).getNaam());
+
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("naam", concerten.get(position).getNaam());
+                                    bundle.putString("id", concerten.get(position).getId());
+
+                                    Intent intent = new Intent(getApplicationContext(), ConcertDetail.class);
+                                    intent.putExtras(bundle);
+
+                                    startActivity(intent);
+
+                                }
+                            });
+
                 }
             });
             httpReader.execute("https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&countryCode=BE&apikey=ULfwtsW3mXLAZ9euNL3aEFVoIbtGpAeE&size=20");
         }
-
-    public void details_onClick(View v)
-    {
-        String Name=
-
-        Intent intent = new Intent(this, ConcertDetail.class);
-        startActivity(intent);
-    }
-
-
-
-
 }
