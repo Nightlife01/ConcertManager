@@ -21,15 +21,15 @@ public class Favorieten extends AppCompatActivity {
 
 
     private void toonFavorieten(){
-        List<Concert> concerten = new ArrayList<Concert>();
+        List<Concert> favorieten = new ArrayList<Concert>();
         //concerten.add(new Concert("lala", "Elton John - Platinum Tickets"));
         //concerten.add(new Concert("bebe", "James Arthur"));
 
         ArrayAdapter<Concert> adapter =
                 new ArrayAdapter<Concert>(getApplicationContext(),
-                        android.R.layout.simple_list_item_1, concerten);
+                        android.R.layout.simple_list_item_1, favorieten);
 
-        final ListView listConcerten = (ListView) findViewById(R.id.listViewItems);
-        listConcerten.setAdapter(adapter);
+        final ListView listFavorieten = (ListView) findViewById(R.id.listViewItems);
+        listFavorieten.setAdapter(adapter);
     }
 }

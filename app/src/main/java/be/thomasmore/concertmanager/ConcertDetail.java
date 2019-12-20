@@ -59,15 +59,16 @@ public class ConcertDetail extends AppCompatActivity {
 
         TextView genreView = (TextView) findViewById(R.id.genre);
 
-        String genre = "";
-        List<String> genres = concert.getGenres();
-        for (String genr : genres){
-            genre += genr + ", ";
-        }
-        genreView.setText(genre);
+        String genres = concert.getGenres();
+        genreView.setText(genres);
     }
 
     public void onClick(View v){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(concert.getUrl()));
+        startActivity(browserIntent);
+    }
+
+    public void favorite(View v){
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(concert.getUrl()));
         startActivity(browserIntent);
     }

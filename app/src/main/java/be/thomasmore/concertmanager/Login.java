@@ -24,6 +24,8 @@ public class Login extends AppCompatActivity {
         passwoord = (EditText) findViewById(R.id.password);
         loginButton = (Button) findViewById(R.id.loginButton);
 
+        final Intent intent = new Intent(this, MainActivity.class);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,7 +33,7 @@ public class Login extends AppCompatActivity {
                 String s2 = passwoord.getText().toString();
                 Boolean checkemailpass = db.emailPasswoord(s1, s2);
                 if (checkemailpass == true) {
-                    Toast.makeText(getApplicationContext(), "Inloggen gelukt", Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
                 }
                 else
                 {

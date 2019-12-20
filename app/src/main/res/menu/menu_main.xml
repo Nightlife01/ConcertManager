@@ -17,6 +17,4 @@
                 android:title="Review schrijven" />
             <item android:id="@+id/menu_login"
                 android:title="Login"/>
-            <item android:id="@+id/menu_detail"
-                android:title="Detail"/>
 </menu>
