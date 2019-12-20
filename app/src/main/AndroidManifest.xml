@@ -12,21 +12,30 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ReviewToevoegen"></activity>
-        <activity android:name=".ConcertDetailUitDb" />
+        <activity android:name=".ReviewToevoegen"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ConcertDetailUitDb"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Registreer"
             android:label="@string/title_activity_registreer"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ReviewSchrijven"
             android:label="@string/title_activity_review_toevoegen"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Reviews" />
-        <activity android:name=".ConcertDetail" />
-        <activity android:name=".Favorieten" />
-        <activity android:name=".Login" />
-        <activity android:name=".Agenda" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Reviews"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ConcertDetail"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Favorieten"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Login"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Agenda"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SplashScreen"
             android:label="@string/app_name"

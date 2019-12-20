@@ -13,6 +13,4 @@
                 android:title="Reviews" />
             <item android:id="@+id/menu_toevoegen"
                 android:title="Review toevoegen" />
-            <item android:id="@+id/menu_login"
-                android:title="Login"/>
 </menu>
