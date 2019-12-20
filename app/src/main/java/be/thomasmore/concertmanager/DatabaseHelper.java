@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,15 +30,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "url TEXT," +
                 "image TEXT," +
                 "datum TEXT," +
-                "genres TEXT)";
+                "genres TEXT";
         db.execSQL(CREATE_TABLE_Concert);
 
         insertConcerten(db);
 
     }
 
-    private void insertConcerten(SQLiteDatabase db) {
-        db.execSQL("INSERT INTO concert (id, naam,url,image,datum,genres) VALUES ('1', 'Rock werchter 2019','https://www.rockwerchter.be/nl/','https://assets.rockwerchter.be/files/cache/history_detail/files/rw19-v2-5d306b4f52a6a.jpg','2019-06-27','ROCK');");
+    private void insertConcerten(SQLiteDatabase db) {JSONObject json = new JSONObject();
+
+
+
+        db.execSQL("INSERT INTO concert (id, naam,url,image,datum,genres) VALUES ('1', 'Rock werchter 2019','https://www.rockwerchter.be/nl/','https://assets.rockwerchter.be/files/cache/history_detail/files/rw19-v2-5d306b4f52a6a.jpg','2019-06-27','ROCK, POP');");
 
     }
 
@@ -48,13 +54,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
+       /* if (cursor.moveToFirst()) {
             do {
                 Concert concert = new Concert(cursor.getString(0),
                         cursor.getString(1), cursor.getString(2), cursor.getString(3),cursor.getString(4),cursor.getString(5));
                 lijstConcerten.add(concert);
             } while (cursor.moveToNext());
         }
+        
+        */
 
         cursor.close();
         db.close();
