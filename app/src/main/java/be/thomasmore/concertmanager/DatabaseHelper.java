@@ -124,6 +124,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert("concert",null,contentValues);
     }
 
+    public void removeFavorite(Concert concert){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int numrows = db.delete(
+                "concert",
+                "id = ?",
+                new String[] { String.valueOf(concert.getId()) });
+
+        db.close();
+
+    }
+
     public boolean checkConcert(String id){
         SQLiteDatabase db = this.getReadableDatabase();
         boolean output = false;

@@ -2,7 +2,10 @@ package be.thomasmore.concertmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -20,15 +23,31 @@ public class Reviews extends AppCompatActivity {
     }
 
     private void toonReviews(){
-        List<Concert> concerten = new ArrayList<Concert>();
-        //concerten.add(new Concert(8, "Werchter Boutique 2019"));
-        //concerten.add(new Concert(19, "Rock Werchter 2019"));
+        final List<Concert> reviews = new ArrayList<Concert>();
 
         ArrayAdapter<Concert> adapter =
                 new ArrayAdapter<Concert>(getApplicationContext(),
-                        android.R.layout.simple_list_item_1, concerten);
+                        android.R.layout.simple_list_item_1, reviews);
 
         final ListView listConcerten = (ListView) findViewById(R.id.listViewItems);
         listConcerten.setAdapter(adapter);
+
+        listConcerten.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parentView,
+                                            View childView, int position, long id) {
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("naam", reviews.get(position).getNaam());
+                        bundle.putString("id", reviews.get(position).getId());
+
+                        Intent intent = new Intent(getApplicationContext(), ReviewSchrijven.class);
+                        intent.putExtras(bundle);
+
+                        startActivity(intent);
+
+                    }
+                });
     }
 }
