@@ -76,6 +76,6 @@ public class Agenda extends AppCompatActivity {
 
                 }
             });
-            httpReader.execute("https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&countryCode=BE&sort=date,asc&apikey=ULfwtsW3mXLAZ9euNL3aEFVoIbtGpAeE&size=20");
+            httpReader.execute("https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&countryCode=BE&apikey=ULfwtsW3mXLAZ9euNL3aEFVoIbtGpAeE&size=20");
         }
 }
