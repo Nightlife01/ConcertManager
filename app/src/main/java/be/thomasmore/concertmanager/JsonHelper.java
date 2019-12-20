@@ -45,8 +45,41 @@ public class JsonHelper {
         try {
             JSONObject JSONObjectConcert = new JSONObject(jsonTekst);
 
+            JSONArray JSONArrayImages = JSONObjectConcert.getJSONArray("images");
+            JSONObject JSONObjectImage = JSONArrayImages.getJSONObject(0);
+
+            JSONObject JSONObjectDates = JSONObjectConcert.getJSONObject("dates");
+            JSONObject JSONObjectDate = JSONObjectDates.getJSONObject("start");
+
+            JSONArray jsonArrayGenres = JSONObjectConcert.getJSONArray("classifications");
+
+            List<String> genres = new ArrayList<>();
+            String genre0 = "";
+            for (int i = 0; i < jsonArrayGenres.length(); i++)
+            {
+                JSONObject jsonObjectGenre = jsonArrayGenres.getJSONObject(i);
+                JSONObject jsonObjectGenreName = jsonObjectGenre.getJSONObject("genre");
+                JSONObject jsonObjectSubGenreName = jsonObjectGenre.getJSONObject("subGenre");
+
+                String genre = jsonObjectGenreName.getString("name");
+                String subGenre = jsonObjectSubGenreName.getString("name");
+
+                if(genre.equals(genre0)){
+                }
+                else{
+                    genre0 = genre;
+                    genres.add(genre);
+                }
+                genres.add(subGenre);
+            }
+
             concert.setNaam(JSONObjectConcert.getString("name"));
             concert.setId(JSONObjectConcert.getString("id"));
+            concert.setImage(JSONObjectImage.getString("url"));
+            concert.setDate(JSONObjectDate.getString("localDate"));
+            concert.setGenres(genres);
+            concert.setUrl(JSONObjectConcert.getString("url"));
+
 
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());

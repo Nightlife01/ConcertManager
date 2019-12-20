@@ -8,18 +8,18 @@ public class Concert {
     private String naam;
     private String url;
     private String image;
-    private Date date;
+    private String date;
     private List<String> genres;
 
     public Concert() {
     }
 
-    public Concert(String id, String naam, String url, String image, Date datum, List<String> genres) {
+    public Concert(String id, String naam, String url, String image, String date, List<String> genres) {
         this.id = id;
         this.naam = naam;
         this.url = url;
         this.image = image;
-        this.date = datum;
+        this.date = date;
         this.genres = genres;
     }
 
@@ -55,11 +55,11 @@ public class Concert {
         this.image = image;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -67,7 +67,7 @@ public class Concert {
         return genres;
     }
 
-    public void setDate(List<String> genres) {
+    public void setGenres(List<String> genres) {
         this.genres = genres;
     }
 
