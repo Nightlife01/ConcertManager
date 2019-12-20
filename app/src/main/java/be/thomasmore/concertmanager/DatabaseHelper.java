@@ -13,9 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+
+
+
     public DatabaseHelper(Context context)
     {
-        super(context,"login.db" ,null,1);
+        super(context,"concert.db" ,null,3);
     }
 
     @Override
@@ -24,22 +27,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("Create table user(email text primary key, password text)");
 
 
-        String CREATE_TABLE_Concert = "CREATE TABLE concert (" +
+        String CREATE_TABLE_CONCERT = "CREATE TABLE concert (" +
                 "id TEXT PRIMARY KEY," +
                 "naam TEXT," +
                 "url TEXT," +
                 "image TEXT," +
                 "datum TEXT," +
-                "genres TEXT";
-        db.execSQL(CREATE_TABLE_Concert);
+                "genres TEXT)";
+        db.execSQL(CREATE_TABLE_CONCERT);
 
         insertConcerten(db);
 
     }
 
-    private void insertConcerten(SQLiteDatabase db) {JSONObject json = new JSONObject();
-
-
+    private void insertConcerten(SQLiteDatabase db)
+    {
 
         db.execSQL("INSERT INTO concert (id, naam,url,image,datum,genres) VALUES ('1', 'Rock werchter 2019','https://www.rockwerchter.be/nl/','https://assets.rockwerchter.be/files/cache/history_detail/files/rw19-v2-5d306b4f52a6a.jpg','2019-06-27','ROCK, POP');");
 
@@ -54,15 +56,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-       /* if (cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             do {
                 Concert concert = new Concert(cursor.getString(0),
                         cursor.getString(1), cursor.getString(2), cursor.getString(3),cursor.getString(4),cursor.getString(5));
                 lijstConcerten.add(concert);
             } while (cursor.moveToNext());
         }
-        
-        */
+
+
 
         cursor.close();
         db.close();
