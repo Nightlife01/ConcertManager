@@ -15,7 +15,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 6;
     // Database Name
     private static final String DATABASE_NAME = "concert.db";
 
@@ -37,7 +37,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "url TEXT," +
                 "image TEXT," +
                 "datum TEXT," +
-                "genres TEXT)";
+                "genres TEXT," +
+                "score INT)";
         db.execSQL(CREATE_TABLE_CONCERT);
 
         insertConcerten(db);
@@ -124,6 +125,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert("concert",null,contentValues);
     }
 
+    public void removeFavorite(Concert concert){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int numrows = db.delete(
+                "concert",
+                "id = ?",
+                new String[] { String.valueOf(concert.getId()) });
+
+        db.close();
+
+    }
+
     public boolean checkConcert(String id){
         SQLiteDatabase db = this.getReadableDatabase();
         boolean output = false;
@@ -195,21 +208,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return lijst;
     }
 
-    public boolean updateConcert(Concert concert) {
+    public void updateConcert(Concert concert, int score) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put("id", concert.getId());
+        values.put("naam", concert.getNaam());
+        values.put("url", concert.getUrl());
+        values.put("image", concert.getImage());
+        values.put("datum", concert.getDate());
         values.put("score", concert.getScore());
 
 
-        int numrows = db.update(
+        db.update(
                 "concert",
                 values,
                 "id = ?",
                 new String[] { String.valueOf(concert.getId()) });
 
         db.close();
-        return numrows > 0;
     }
 
 

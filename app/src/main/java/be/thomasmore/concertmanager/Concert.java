@@ -10,7 +10,7 @@ public class Concert {
     private String image;
     private String date;
     private String genres;
-    private int Score;
+    private int score;
 
     public Concert() {
     }
@@ -22,6 +22,7 @@ public class Concert {
         this.image = image;
         this.date = date;
         this.genres = genres;
+        this.score = 0;
     }
 
     public String getId() {
@@ -73,11 +74,11 @@ public class Concert {
     }
 
     public int getScore() {
-        return Score;
+        return score;
     }
 
     public void setScore(int score) {
-        Score = score;
+        this.score = score;
     }
 
     @Override

@@ -45,7 +45,6 @@ public class Agenda extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                toonConcerten();
             }
 
         });

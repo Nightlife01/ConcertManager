@@ -30,7 +30,7 @@ public class ReviewToevoegen extends AppCompatActivity {
 
 
     private void toonReviewableConcert(){
-        String currentDate = new SimpleDateFormat("yyyy-mm-dd", Locale.getDefault()).format(new Date());
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         Log.e("Datum",""+currentDate);
         final List<Concert> reviewables = db.getReviewableConcerts(currentDate);
 

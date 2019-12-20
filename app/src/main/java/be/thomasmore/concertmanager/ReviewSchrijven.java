@@ -1,6 +1,7 @@
 package be.thomasmore.concertmanager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -60,6 +61,15 @@ public class ReviewSchrijven extends AppCompatActivity {
 
         String genres = concert.getGenres();
         genreView.setText(genres);
+
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        int score = concert.getScore();
+        Log.e("Score",""+score);
+        if(score != 0){
+            ratingBar.setRating(score);
+        }
+
+
     }
 
     public void addListenerOnRatingBar() {
@@ -91,27 +101,18 @@ public class ReviewSchrijven extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(ReviewSchrijven.this,
-                        String.valueOf(ratingBar.getRating()),
-                        Toast.LENGTH_SHORT).show();
+                RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+                int score = (int) ratingBar.getRating();
+
+                concert.setScore(score);
+
+                db.updateConcert(concert, score);
 
             }
 
         });
 
     }
-
-    public void buttonAdd_onClick(View v)
-    {
-        TextView Textscore = (TextView) findViewById(R.id.txtRatingValue);
-        String score = Textscore.getText().toString();
-
-        Concert concert=new Concert();
-        concert.setScore(Integer.parseInt(score));
-
-        db.updateConcert(concert);
-    }
-
 
 
 }

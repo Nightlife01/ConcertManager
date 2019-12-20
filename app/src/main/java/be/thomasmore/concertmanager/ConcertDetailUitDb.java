@@ -57,8 +57,10 @@ public class ConcertDetailUitDb extends AppCompatActivity {
         genreView.setText(genres);
 
         Button favoriteButton = (Button) findViewById(R.id.favorite);
-        if(favorite){ favoriteButton.setText("Verwijder uit favorieten"); }
-        else{ favoriteButton.setText("Voeg toe aan favorieten"); }
+        if(favorite){ favoriteButton.setText("Verwijder uit favorieten");
+            favoriteButton.setTag("Delete"); }
+        else{ favoriteButton.setText("Voeg toe aan favorieten");
+            favoriteButton.setTag("Add"); }
 
     }
 
@@ -70,7 +72,14 @@ public class ConcertDetailUitDb extends AppCompatActivity {
 
     public void favorite(View v)
     {
-        db.insertFavorite(concert);
+        Button favoriteButton = (Button) findViewById(R.id.favorite);
+        if(favoriteButton.getTag().equals("Add")){
+            db.insertFavorite(concert);
+        }
+        else{
+            db.removeFavorite(concert);
+        }
+
     }
 
     public void checkFavorite(String id)
