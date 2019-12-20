@@ -207,4 +207,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return lijst;
     }
 
+    public boolean updateConcert(Concert concert) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("score", concert.getScore());
+
+
+        int numrows = db.update(
+                "concert",
+                values,
+                "id = ?",
+                new String[] { String.valueOf(concert.getId()) });
+
+        db.close();
+        return numrows > 0;
+    }
+
+
 }
