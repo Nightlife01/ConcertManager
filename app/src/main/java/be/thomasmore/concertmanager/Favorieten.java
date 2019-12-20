@@ -22,8 +22,8 @@ public class Favorieten extends AppCompatActivity {
 
     private void toonFavorieten(){
         List<Concert> concerten = new ArrayList<Concert>();
-        concerten.add(new Concert("lala", "Elton John - Platinum Tickets"));
-        concerten.add(new Concert("bebe", "James Arthur"));
+        //concerten.add(new Concert("lala", "Elton John - Platinum Tickets"));
+        //concerten.add(new Concert("bebe", "James Arthur"));
 
         ArrayAdapter<Concert> adapter =
                 new ArrayAdapter<Concert>(getApplicationContext(),
