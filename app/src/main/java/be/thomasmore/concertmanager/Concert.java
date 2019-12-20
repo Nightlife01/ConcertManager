@@ -10,6 +10,7 @@ public class Concert {
     private String image;
     private String date;
     private String genres;
+    private int Score;
 
     public Concert() {
     }
@@ -69,6 +70,14 @@ public class Concert {
 
     public void setGenres(String genres) {
         this.genres = genres;
+    }
+
+    public int getScore() {
+        return Score;
+    }
+
+    public void setScore(int score) {
+        Score = score;
     }
 
     @Override

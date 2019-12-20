@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
@@ -75,6 +76,8 @@ public class ReviewSchrijven extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     public void addListenerOnButton() {
@@ -97,5 +100,18 @@ public class ReviewSchrijven extends AppCompatActivity {
         });
 
     }
+
+    public void buttonAdd_onClick(View v)
+    {
+        TextView Textscore = (TextView) findViewById(R.id.txtRatingValue);
+        String score = Textscore.getText().toString();
+
+        Concert concert=new Concert();
+        concert.setScore(Integer.parseInt(score));
+
+        db.updateConcert(concert);
+    }
+
+
 
 }
