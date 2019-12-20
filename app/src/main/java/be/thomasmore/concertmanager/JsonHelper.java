@@ -53,7 +53,7 @@ public class JsonHelper {
 
             JSONArray jsonArrayGenres = JSONObjectConcert.getJSONArray("classifications");
 
-            List<String> genres = new ArrayList<>();
+            String genres = "";
             String genre0 = "";
             for (int i = 0; i < jsonArrayGenres.length(); i++)
             {
@@ -68,9 +68,11 @@ public class JsonHelper {
                 }
                 else{
                     genre0 = genre;
-                    genres.add(genre);
+                    genres += genre;
+                    genres += ", ";
                 }
-                genres.add(subGenre);
+                genres+=subGenre;
+                genres+=", ";
             }
 
             concert.setNaam(JSONObjectConcert.getString("name"));

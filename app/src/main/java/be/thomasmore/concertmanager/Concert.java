@@ -9,12 +9,12 @@ public class Concert {
     private String url;
     private String image;
     private String date;
-    private List<String> genres;
+    private String genres;
 
     public Concert() {
     }
 
-    public Concert(String id, String naam, String url, String image, String date, List<String> genres) {
+    public Concert(String id, String naam, String url, String image, String date, String genres) {
         this.id = id;
         this.naam = naam;
         this.url = url;
@@ -63,11 +63,11 @@ public class Concert {
         this.date = date;
     }
 
-    public List<String> getGenres() {
+    public String getGenres() {
         return genres;
     }
 
-    public void setGenres(List<String> genres) {
+    public void setGenres(String genres) {
         this.genres = genres;
     }
 

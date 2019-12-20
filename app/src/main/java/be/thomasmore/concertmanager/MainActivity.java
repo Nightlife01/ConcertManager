@@ -61,10 +61,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent7 = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent7);
                 return true;
-            case R.id.menu_detail:
-                Intent intent8 = new Intent(getApplicationContext(), ConcertDetail.class);
-                startActivity(intent8);
-                return true;
             default:
                 return false;
         }
