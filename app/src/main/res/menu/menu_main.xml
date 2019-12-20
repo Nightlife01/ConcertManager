@@ -11,8 +11,6 @@
                 android:title="Favorieten" />
             <item android:id="@+id/menu_reviews"
                 android:title="Reviews" />
-            <item android:id="@+id/menu_kaart"
-                android:title="Kaart" />
             <item android:id="@+id/menu_toevoegen"
                 android:title="Review toevoegen" />
             <item android:id="@+id/menu_login"

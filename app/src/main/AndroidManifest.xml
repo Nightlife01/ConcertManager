@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/logo"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/logo"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -17,10 +17,6 @@
         <activity
             android:name=".Registreer"
             android:label="@string/title_activity_registreer"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Kaart"
-            android:label="@string/title_activity_kaart"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ReviewSchrijven"
@@ -45,6 +41,6 @@
 
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
+
 
 </manifest>

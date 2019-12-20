@@ -22,8 +22,14 @@
         app:layout_constraintTop_toTopOf="parent" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/holo_orange_light"
+            android:textColorHighlight="@color/colorAccent"
+            android:padding="10dp"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textStyle="bold"
             android:text="Concert"
             android:textSize="40dp"
             app:layout_constraintStart_toStartOf="parent"

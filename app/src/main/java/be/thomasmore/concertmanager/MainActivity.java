@@ -50,10 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent4 = new Intent(getApplicationContext(), Reviews.class);
                 startActivity(intent4);
                 return true;
-            case R.id.menu_kaart:
-                Intent intent5 = new Intent(getApplicationContext(), Kaart.class);
-                startActivity(intent5);
-                return true;
+
             case R.id.menu_toevoegen:
                 Intent intent6 = new Intent(getApplicationContext(), ReviewToevoegen.class);
                 startActivity(intent6);
