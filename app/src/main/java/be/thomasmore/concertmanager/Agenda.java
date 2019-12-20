@@ -8,39 +8,50 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Agenda extends AppCompatActivity {
 
+    private List<String> sortering = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agenda);
 
+        toonSorteren();
         toonConcerten();
     }
 
+    private void toonSorteren(){
+        sortering.add("Populariteit");
+        sortering.add("Datum");
+
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(this,
+                        android.R.layout.simple_list_item_1, sortering);
+
+        final Spinner spinnerSort = (Spinner) findViewById(R.id.sortering);
+        spinnerSort.setAdapter(adapter);
+
+        spinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                toonConcerten();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                toonConcerten();
+            }
+
+        });
+    }
+
     private void toonConcerten(){
-       /* List<Concert> concerten = new ArrayList<Concert>();
-        concerten.add(new Concert(1, "Elton John - Platinum Tickets"));
-        concerten.add(new Concert(2, "Werchter Boutique pop-up"));
-        concerten.add(new Concert(3, "Werchter Boutique 2020"));
-        concerten.add(new Concert(4, "Céline Dion - Platinum Tickets"));
-        concerten.add(new Concert(5, "James Arthur"));
-        concerten.add(new Concert(6, "Alter Bridge"));
-
-        ArrayAdapter<Concert> adapter =
-                new ArrayAdapter<Concert>(getApplicationContext(),
-                        android.R.layout.simple_list_item_1, concerten);
-
-        final ListView listConcerten = (ListView) findViewById(R.id.listViewItems);
-        listConcerten.setAdapter(adapter);
-
-        */
-
-
             HttpReader httpReader = new HttpReader();
             httpReader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
                 @Override
@@ -76,6 +87,17 @@ public class Agenda extends AppCompatActivity {
 
                 }
             });
+
+        Spinner spinnerSort = (Spinner) findViewById(R.id.sortering);
+        String sort = (String)spinnerSort.getSelectedItem();
+
+        if (sort.equals("Datum"))
+        {
+            httpReader.execute("https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&countryCode=BE&sort=date,asc&apikey=ULfwtsW3mXLAZ9euNL3aEFVoIbtGpAeE&size=20");
+        }
+        else{
             httpReader.execute("https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&countryCode=BE&apikey=ULfwtsW3mXLAZ9euNL3aEFVoIbtGpAeE&size=20");
+        }
+
         }
 }

@@ -2,10 +2,18 @@ package be.thomasmore.concertmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.net.URL;
+import java.util.List;
 
 public class ConcertDetail extends AppCompatActivity {
     private Concert concert;
@@ -42,5 +50,25 @@ public class ConcertDetail extends AppCompatActivity {
     private void showConcert(Concert concert){
         TextView name = (TextView) findViewById(R.id.name);
         name.setText(concert.getNaam());
+
+        ImageView image = (ImageView) findViewById(R.id.image);
+        new ImageLoadTask(concert.getImage(), image).execute();
+
+        TextView date = (TextView) findViewById(R.id.date);
+        date.setText(concert.getDate());
+
+        TextView genreView = (TextView) findViewById(R.id.genre);
+
+        String genre = "";
+        List<String> genres = concert.getGenres();
+        for (String genr : genres){
+            genre += genr + ", ";
+        }
+        genreView.setText(genre);
+    }
+
+    public void onClick(View v){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(concert.getUrl()));
+        startActivity(browserIntent);
     }
 }
